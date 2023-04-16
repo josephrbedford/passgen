@@ -22,12 +22,12 @@ var generateBtn = document.querySelector("#generate");
   
 
   
-  
+  var password = writePassword();
   
   
   
   function writePassword() {
-
+    charArray.length = 0;
     getPasswordInfo();  // Get password requirements from user and convert to boolean
 
     checkSelection();   // Check at least one type of character is selected
@@ -37,11 +37,11 @@ var generateBtn = document.querySelector("#generate");
     password = buildPass(); // Build password
 
     console.log(password);
-
-    var password = writePassword();
     var passwordText = document.querySelector("#password");
 
     passwordText.value = password;
+
+    
     
   }
   
@@ -50,6 +50,7 @@ var generateBtn = document.querySelector("#generate");
       pwdLength = prompt("Please enter length (8-128 chars)");
       if (pwdLength == null || pwdLength == "" || pwdLength < 8 || pwdLength > 128) {
         window.alert("Please enter a valid value");
+        return;
       }
       console.log(pwdLength);
 
@@ -90,6 +91,7 @@ var generateBtn = document.querySelector("#generate");
     }
 
     function assembleCharArray() {
+      charArray.length = 0;
       
       console.log(lowerBool);
       console.log(upperBool);

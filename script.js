@@ -8,9 +8,6 @@ var password = undefined;
 var boolTotal = null;
 var charArray = [];
 
- 
-  
-
 // High level steps
   function writePassword() {
     charArray.length = 0;     // Make sure character array is empty
@@ -18,6 +15,8 @@ var charArray = [];
     checkSelection();         // Check at least one type of character is selected
     assembleCharArray();      // Assemble array of character possibilities
     password = buildPass();   // Build password
+
+    // Write password to the #password input
     var passwordText = document.querySelector("#password");   // Pass password back to webpage
     passwordText.value = password;                            // 
     return password;
@@ -60,18 +59,21 @@ var charArray = [];
   }
 
   // Assemble array for random picker to use, based on selected sets of characters
+  // Clear array incase generator ran before
+  // Check if user asked for particular char type
+  // Loop through particular ascii codes for that char type
+  // Push to end of array
+
     function assembleCharArray() {
-      charArray.length = 0;
-      if (lowerBool == true) {
-        console.log("lower");
-        for (var i = 97; i <= 122; i++) {
-          charArray.push(String.fromCharCode(i));
+      charArray.length = 0;                                                                   
+      if (lowerBool == true) {                                                                
+        for (var i = 97; i <= 122; i++) {                                                     
+          charArray.push(String.fromCharCode(i));                                       
         }
       }
-       if (upperBool == true) {
-        console.log("upper");
-        for (var i = 65; i <= 90; i++) {
-          charArray.push(String.fromCharCode(i));
+       if (upperBool == true) {                                                              
+        for (var i = 65; i <= 90; i++) {                                               
+          charArray.push(String.fromCharCode(i));                                       
         }
       }
       if (numericBool == true) {
@@ -86,44 +88,26 @@ var charArray = [];
           charArray.push(String.fromCharCode(i));
         }
       } 
-        // console.log(charArray);
-      }
+    }
 
+    // Assemble password string
     function buildPass() {
-      if (boolTotal !== 0) {
-      var str = "";
-      console.log("Pwd Length is " + pwdLength);
-      console.log(charArray);
-      for (var i = 1; i <= pwdLength; i++) {
-        var randomItem = charArray[Math.floor(Math.random() * charArray.length)];
-        str += randomItem;
-        console.log(randomItem);
-      }
-      console.log(str);
-      return str;
-    } else {
-      str = "";
-      return str;
+      if (boolTotal !== 0) {                                                            // Make sure at least one char type is selected
+        var str = "";                                                                   // Initialise string
+          for (var i = 1; i <= pwdLength; i++) {                                        // Loop until length of character array
+          var randomItem = charArray[Math.floor(Math.random() * charArray.length)];     // Randomize number between 0 and length of array
+          str += randomItem;                                                            // Add next item to string
+        }
+        return str;                                                                     // Return password string to calling argument
+      } else {
+        str = "";                                                                       // Initialise string
+      return str;                                                                       // Return empty string
     }
   }
 
-     
-var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+// Generate button on webpage
+  var generateBtn = document.querySelector("#generate");
 
-
-   
-  
 // Add event listener to generate button
   password = generateBtn.addEventListener("click", writePassword);
-
-  
-
-  
-  // var password = writePassword();
-  console.log("Final password " + password);
-
-
-  
-  

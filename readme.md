@@ -1,4 +1,4 @@
-# README - html-css-refactor
+# README - Password Generator
 
 Birmingham coding bootcamp week three challenge was to create a password generator.
 
